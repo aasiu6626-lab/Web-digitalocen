@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital ocean</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafd;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 24px;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #475569;
+            margin-bottom: 40px;
+        }
+
+        /* Grid harga */
+        .price-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .price-card {
+            background: white;
+            border-radius: 32px;
+            padding: 28px 24px;
+            box-shadow: 0 15px 35px -10px rgba(0,70,150,0.15);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #eef2f8;
+        }
+
+        .price-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 45px -8px #0060ff40;
+            border-color: #0060ff;
+        }
+
+        .price-card h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #0b2b4a;
+        }
+
+        .price-card .harga {
+            font-size: 2.6rem;
+            font-weight: 800;
+            color: #0060ff;
+            margin: 15px 0;
+            display: flex;
+            align-items: baseline;
+            gap: 5px;
+        }
+
+        .harga span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #64748b;
+            margin-left: 5px;
+        }
+
+        .specs {
+            list-style: none;
+            margin: 20px 0;
+            padding: 0;
+        }
+
+        .specs li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #e2e8f0;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .specs i {
+            color: #0060ff;
+            width: 22px;
+        }
+
+        .btn-bayar {
+            background: linear-gradient(105deg, #0060ff, #004ac0);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 16px 0;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            margin-top: 15px;
+            box-shadow: 0 10px 20px -7px #0060ffcc;
+        }
+
+        .btn-bayar:hover {
+            background: #003bb3;
+            transform: scale(1.02);
+        }
+
+        /* Tabel VPS */
+        .vps-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px -5px #b0c9e0;
+            margin: 50px 0;
+        }
+
+        .vps-table th {
+            background: #e7f0fd;
+            color: #003c99;
+            font-weight: 700;
+            padding: 18px 12px;
+            text-align: left;
+        }
+
+        .vps-table td {
+            padding: 15px 12px;
+            border-bottom: 1px solid #ecf1f7;
+        }
+
+        .vps-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .btn-vps {
+            background: #e2ecfe;
+            color: #0060ff;
+            border: 1px solid #0060ff;
+            padding: 8px 22px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-vps:hover {
+            background: #0060ff;
+            color: white;
+        }
+
+        /* Metode pembayaran */
+        .payment-section {
+            background: white;
+            border-radius: 40px;
+            padding: 40px;
+            margin: 60px 0;
+            box-shadow: 0 15px 35px #d9e2f0;
+        }
+
+        .payment-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .payment-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .method {
+            background: #f0f6ff;
+            border-radius: 30px;
+            padding: 25px 20px;
+            flex: 1 1 200px;
+            text-align: center;
+            border: 1px solid #dbe7f5;
+        }
+
+        .method i {
+            font-size: 2.5rem;
+            color: #0060ff;
+            margin-bottom: 10px;
+        }
+
+        .method h4 {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .method .detail {
+            background: white;
+            padding: 12px 8px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin: 10px 0;
+            border: 1px dashed #0060ff;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 500px;
+            width: 90%;
+            border-radius: 40px;
+            padding: 35px;
+            box-shadow: 0 30px 60px #001e3c;
+            animation: pop 0.3s ease;
+        }
+
+        @keyframes pop {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .modal-detail {
+            background: #f0f7ff;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .modal-detail p {
+            margin: 10px 0;
+        }
+
+        .payment-code {
+            background: #fff7e0;
+            border: 2px dashed #f1b44c;
+            padding: 15px;
+            border-radius: 20px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: 3px;
+            margin: 20px 0;
+        }
+
+        .btn-close {
+            background: #1e293b;
+            color: white;
+            border: none;
+            padding: 14px;
+            width: 100%;
+            border-radius: 60px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn-close:hover {
+            background: #0f172a;
+        }
+
+        footer {
+            text-align: center;
+            margin: 40px 0;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>☁️ Daftar Harga & Metode Pembayaran</h1>
+        <div class="subtitle">Pilih paket yang sesuai, kemudian selesaikan pembayaran melalui salah satu metode di bawah.</div>
+
+        <!-- DigitalOcean Cards -->
+        <h2 style="margin: 30px 0 20px;">💎 Akun DigitalOcean (termasuk credit $100–$200)</h2>
+        <div class="price-grid">
+            <div class="price-card">
+                <h3>Droplet Basic</h3>
+                <div class="harga">Rp85.000<span>/akun</span></div>
+                <ul class="specs">
+                    <li><i class="fas fa-microchip"></i> 1 vCPU · 512MB RAM</li>
+                    <li><i class="fas fa-database"></i> 10GB SSD NVMe</li>
+                    <li><i class="fas fa-gem"></i> $100 credit gratis</li>
+                    <li><i class="fas fa-lock"></i> Root akses</li>
+                </ul>
+                <button class="btn-bayar" data-produk="DO Basic Rp85k" data-harga="85000">BELI SEKARANG</button>
+            </div>
+            <div class="price-card">
+                <h3>CPU-Optimized</h3>
+                <div class="harga">Rp275.000<span>/akun</span></div>
+                <ul class="specs">
+                    <li><i class="fas fa-microchip"></i> 2 vCPU dedicated</li>
+                    <li><i class="fas fa-memory"></i> 4GB RAM</li>
+                    <li><i class="fas fa-database"></i> 25GB NVMe</li>
+                    <li><i class="fas fa-gem"></i> $200 credit</li>
+                </ul>
+                <button class="btn-bayar" data-produk="DO CPU-Opt Rp275k" data-harga="275000">BELI SEKARANG</button>
+            </div>
+            <div class="price-card">
+                <h3>General Purpose</h3>
+                <div class="harga">Rp395.000<span>/akun</span></div>
+                <ul class="specs">
+                    <li><i class="fas fa-microchip"></i> 2 vCPU</li>
+                    <li><i class="fas fa-memory"></i> 8GB RAM</li>
+                    <li><i class="fas fa-database"></i> 25GB SSD</li>
+                    <li><i class="fas fa-globe"></i> Pilih lokasi</li>
+                </ul>
+                <button class="btn-bayar" data-produk="DO General Rp395k" data-harga="395000">BELI SEKARANG</button>
+            </div>
+        </div>
+
+        <!-- Tabel VPS Murah -->
+        <h2 style="margin: 50px 0 20px;">🚀 VPS KVM SSD (harga per bulan)</h2>
+        <table class="vps-table">
+            <thead><tr><th>vCPU</th><th>RAM</th><th>SSD</th><th>Transfer</th><th>Harga/bulan</th><th></th></tr></thead>
+            <tbody>
+                <tr><td>1 Core</td><td>512 MB</td><td>10 GB</td><td>500 GB</td><td><b>Rp48.000</b></td><td><button class="btn-vps" data-produk="VPS 512MB Rp48k" data-harga="48000">Pilih</button></td></tr>
+                <tr><td>1 Core</td><td>1 GB</td><td>20 GB</td><td>1 TB</td><td><b>Rp80.000</b></td><td><button class="btn-vps" data-produk="VPS 1GB Rp80k" data-harga="80000">Pilih</button></td></tr>
+                <tr><td>2 Core</td><td>2 GB</td><td>30 GB</td><td>2 TB</td><td><b>Rp112.000</b></td><td><button class="btn-vps" data-produk="VPS 2GB Rp112k" data-harga="112000">Pilih</button></td></tr>
+                <tr><td>2 Core</td><td>4 GB</td><td>50 GB</td><td>2 TB</td><td><b>Rp192.000</b></td><td><button class="btn-vps" data-produk="VPS 4GB Rp192k" data-harga="192000">Pilih</button></td></tr>
+            </tbody>
+        </table>
+
+        <!-- Hosting Lokal -->
+        <h2 style="margin: 40px 0 20px;">🇮🇩 Hosting Indonesia (per bulan)</h2>
+        <div class="price-grid">
+            <div class="price-card">
+                <h4>DomaiNesia Starter</h4>
+                <div class="harga">Rp16.500<span>/bln</span></div>
+                <ul class="specs">
+                    <li><i class="fas fa-hdd"></i> 5 GB Cloud SSD</li>
+                    <li><i class="fas fa-infinity"></i> Unlimited bandwidth</li>
+                    <li><i class="fas fa-globe"></i> Domain .biz.id gratis</li>
+                </ul>
+                <button class="btn-bayar" data-produk="Hosting DomaiNesia Rp16.5k" data-harga="16500">PILIH</button>
+            </div>
+            <div class="price-card">
+                <h4>Rumahweb Entry</h4>
+                <div class="harga">Rp15.000<span>/bln</span></div>
+                <ul class="specs">
+                    <li><i class="fas fa-hdd"></i> 3 GB SSD</li>
+                    <li><i class="fas fa-envelope"></i> Email hosting</li>
+                    <li><i class="fas fa-shield"></i> SSL gratis</li>
+                </ul>
+                <button class="btn-bayar" data-produk="Hosting Rumahweb Rp10k" data-harga="10.000">PILIH</button>
+            </div>
+            <div class="price-card">
+                <h4>Jagoan Icon</h4>
+                <div class="harga">Rp250.000<span>/bln</span></div>
+                <ul class="specs">
+                    <li><i class="fas fa-microchip"></i> 1 core CPU</li>
+                    <li><i class="fas fa-memory"></i> 1 GB RAM</li>
+                    <li><i class="fas fa-shield-alt"></i> Imunify360</li>
+                </ul>
+                <button class="btn-bayar" data-produk="Hosting Jagoan Rp 20k" data-harga="20000">PILIH</button>
+            </div>
+            <div class="price-card">
+                <h4>MikyHost Basic</h4>
+                <div class="harga">Rp15.000<span>/bln</span></div>
+                <ul class="specs">
+                    <li><i class="fas fa-hdd"></i> 1 GB SSD</li>
+                    <li><i class="fas fa-code"></i> LiteSpeed, Node.js</li>
+                    <li><i class="fas fa-clock"></i> Backup harian</li>
+                </ul>
+                <button class="btn-bayar" data-produk="Hosting MikyHost Rp10k" data-harga="10.320">PILIH</button>
+            </div>
+        </div>
+
+        <!-- Metode Pembayaran -->
+        <div class="payment-section">
+            <h2>💰 Cara Pembayaran</h2>
+            <p>Pilih metode di bawah, lalu lakukan transfer sesuai nominal. Gunakan kode unik agar pesanan cepat diproses.</p>
+            <div class="payment-methods">
+                <div class="method">
+                    <i class="fas fa-university"></i>
+                    <div>a.n. PT CloudRDP</div>
+                </div>
+                <div class="method">
+                    <i class="fas fa-wallet"></i>
+                    <h4>OVO / Dana</h4>
+                    <div class="detail">085165512578 </div>
+                    <div>atas nama CloudRDP</div>
+                </div>
+                <div class="method">
+                    <i class="fas fa-qrcode"></i>
+                    <h4>QRIS (semua e-wallet)</h4>
+                    <div class="detail"><i class="fas fa-camera"></i> scan di tempat</div>
+                </div>
+                <div class="method">
+                    <i class="fab fa-paypal"></i>
+                    <h4>PayPal</h4>
+                    <div class="detail">paypal@cloudrdp.id</div>
+                </div>
+            </div>
+            <p style="margin-top: 20px; background: #fcf8e7; padding: 12px; border-radius: 60px; text-align: center;">
+                ⚡ Setiap pembayaran akan mendapatkan kode unik. Harap sertakan kode tersebut di berita transfer.
+            </p>
+        </div>
+
+        <!-- footer -->
+        <footer>
+            <p>© 2026 CloudRDP.ID — Harga sudah termasuk pajak. Garansi 30 hari untuk semua produk.</p>
+        </footer>
+    </div>
+
+    <!-- Modal Konfirmasi Pembayaran -->
+    <div id="paymentModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3>📋 Detail Pesanan</h3>
+            <div id="modalProduk" class="modal-detail">
+                <!-- akan diisi JS -->
+            </div>
+            <p><strong>Metode Pembayaran:</strong> Pilih salah satu dan transfer tepat nominal + kode unik.</p>
+            <div class="payment-code" id="kodeUnik">UNIK-XXXX</div>
+            <div style="display: flex; gap: 10px; margin: 20px 0;">
+                <span style="background: #d1e7ff; border-radius: 40px; padding: 8px 15px;">📱 DANA 085165512578</span>
+            </div>
+            <p style="font-size: 0.9rem;">* Konfirmasi pembayaran melalui WhatsApp dengan mengirim bukti transfer + kode unik.</p>
+            <button class="btn-close" id="closeModal">Tutup</button>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const modal = document.getElementById('paymentModal');
+            const modalProduk = document.getElementById('modalProduk');
+            const kodeUnikSpan = document.getElementById('kodeUnik');
+            const closeBtn = document.getElementById('closeModal');
+
+            // Fungsi untuk generate kode unik 6 digit
+            function generateKode() {
+                return 'UNIK-' + Math.floor(1000 + Math.random() * 9000);
+            }
+
+            // Handler untuk semua tombol beli (btn-bayar dan btn-vps)
+            function handleBeli(produk, harga) {
+                const kode = generateKode();
+                const nominal = parseInt(harga).toLocaleString('id-ID');
+                modalProduk.innerHTML = `
+                    <p><strong>Produk:</strong> ${produk}</p>
+                    <p><strong>Nominal:</strong> Rp ${nominal}</p>
+                    <p><strong>Kode Unik:</strong> ${kode}</p>
+                    <p style="font-size:0.9rem; color:red;">Transfer tepat Rp ${nominal} (tanpa kode unik tambahan)</p>
+                `;
+                kodeUnikSpan.innerText = kode;
+                modal.style.display = 'flex';
+            }
+
+            // Tombol dengan class btn-bayar (card produk)
+            document.querySelectorAll('.btn-bayar').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const produk = e.target.getAttribute('data-produk') || 'Produk';
+                    const harga = e.target.getAttribute('data-harga') || '0';
+                    handleBeli(produk, harga);
+                });
+            });
+
+            // Tombol vps
+            document.querySelectorAll('.btn-vps').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const produk = e.target.getAttribute('data-produk') || 'VPS Paket';
+                    const harga = e.target.getAttribute('data-harga') || '0';
+                    handleBeli(produk, harga);
+                });
+            });
+
+            // Tutup modal
+            closeBtn.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+            window.addEventListener('click', (e) => {
+                if (e.target === modal) modal.style.display = 'none';
+            });
+        })();
+    </script>
+</body>
+</html>
